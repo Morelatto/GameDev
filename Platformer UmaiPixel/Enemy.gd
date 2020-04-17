@@ -14,8 +14,8 @@ export(Vector2) var size = Vector2.ONE
 func _ready():
 	scale = size
 
-func dead():
-	hp -= 1
+func dead(damage):
+	hp -= damage
 	if hp <= 0:
 		is_dead = true
 		velocity = Vector2.ZERO

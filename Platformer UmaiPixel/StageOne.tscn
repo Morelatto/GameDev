@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ground_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/big_tree.PNG" type="Texture" id=4]
 [ext_resource path="res://ScreenShake.gd" type="Script" id=5]
+[ext_resource path="res://ChangeStage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Crown.tscn" type="PackedScene" id=7]
 
 [node name="StageOne" type="Node2D"]
 
+[node name="Crown" parent="." instance=ExtResource( 7 )]
+position = Vector2( 23.3875, 121.415 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 23.5348, 110.884 )
+position = Vector2( 47.4839, 136.415 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -46,14 +51,24 @@ scroll_base_scale = Vector2( 0.5, 0.5 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 320, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 4 )
 centered = false
 offset = Vector2( 0, -180 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ScreenShake" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="ScreenShake"]
+
+[node name="ChangeStage" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1171.07, 127.615 )
+target_stage = "res://StageTwo.tscn"
 [connection signal="tween_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_completed"]

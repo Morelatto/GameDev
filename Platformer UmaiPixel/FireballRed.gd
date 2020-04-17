@@ -18,7 +18,7 @@ func _physics_process(delta):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-func _on_Fireball_body_entered(body):
+func _on_FireballRed_body_entered(body):
 	if "Enemy" in body.name:
-		body.dead(1)
+		body.dead(2)
 	queue_free()
