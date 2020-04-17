@@ -5,6 +5,10 @@ var width = 8
 var height = 10
 var ice = preload("res://scenes/Ice.tscn")
 
+# goal signal
+signal break_ice
+export (String) var value
+
 func _ready():
 	pass
 
@@ -31,3 +35,4 @@ func _on_Grid_damage_ice(board_position):
 			if ice_pieces[board_position.x][board_position.y].health <= 0:
 				ice_pieces[board_position.x][board_position.y].queue_free()
 				ice_pieces[board_position.x][board_position.y] = null
+				emit_signal("break_ice", value)
