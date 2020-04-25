@@ -17,3 +17,6 @@
 
 ## Mister Taft Creates
 * [Match 3](https://www.youtube.com/playlist?list=PL4vbr3u7UKWqwQlvwvgNcgDL1p_3hcNn2) 20 hours
+
+## Jeremy Bullock
+* [Basic 3D](https://www.youtube.com/playlist?list=PLTZoMpB5Z4aBOtdBUXOeemKdg2fKxgJjm) 1 hour
