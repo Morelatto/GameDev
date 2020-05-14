@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/button-go-return.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Some Time Later.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/ThatNogoFontCasual.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 220
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.0980392, 0.0117647, 0.0117647, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1278.0
+margin_bottom = 446.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.909804, 0.0823529, 0.0823529, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.764706, 0, 1 )
+custom_constants/shadow_offset_x = 8
+custom_constants/shadow_offset_y = 8
+text = "GAME OVER!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button-go-return" type="Button" parent="."]
+margin_left = 434.0
+margin_top = 381.0
+margin_right = 842.0
+margin_bottom = 537.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.992157, 0.290196, 1 )
+custom_colors/font_color_hover = Color( 0.133333, 0.909804, 0.768627, 1 )
+custom_colors/font_color_pressed = Color( 0.933333, 0.0823529, 0.956863, 1 )
+text = "Play Again"
+flat = true
+script = ExtResource( 1 )
+[connection signal="pressed" from="button-go-return" to="button-go-return" method="_on_buttongoreturn_pressed"]

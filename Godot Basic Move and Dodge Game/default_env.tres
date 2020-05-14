@@ -1,0 +1,15 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[ext_resource path="res://new_env.tres" type="ProceduralSky" id=1]
+
+[resource]
+background_mode = 2
+background_sky = ExtResource( 1 )
+ambient_light_color = Color( 0.376471, 0.27451, 0.384314, 1 )
+ambient_light_sky_contribution = 0.0
+fog_color = Color( 0.501961, 0.6, 0.701961, 1 )
+ssao_enabled = true
+ssao_intensity = 4.0
+ssao_radius2 = 4.0
+ssao_intensity2 = 3.0
+ssao_light_affect = 1.0
