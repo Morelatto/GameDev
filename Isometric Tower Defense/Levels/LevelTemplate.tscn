@@ -1,0 +1,154 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Levels/Tilemap.tres" type="TileSet" id=1]
+[ext_resource path="res://Levels/LevelTemplate.gd" type="Script" id=2]
+[ext_resource path="res://Towers/Assets/towerSquare_sampleE_E.png" type="Texture" id=3]
+[ext_resource path="res://UI/Assets/Buttons/grey_button13.png" type="Texture" id=4]
+[ext_resource path="res://UI/Assets/Towers/towerRound_sampleC.png" type="Texture" id=5]
+[ext_resource path="res://UI/Assets/Buttons/blue_button01.png" type="Texture" id=6]
+[ext_resource path="res://UI/Assets/Buttons/grey_button12.png" type="Texture" id=7]
+[ext_resource path="res://UI/Assets/Buttons/yellow_button06.png" type="Texture" id=8]
+[ext_resource path="res://UI/Assets/Towers/towerSquare_sampleE.png" type="Texture" id=9]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 current_color : hint_color;
+
+void fragment() {
+	vec4 final_color = mix(texture(TEXTURE, UV), current_color, texture(TEXTURE, UV).a);
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/current_color = Color( 0.870588, 0.8, 0.0901961, 0.580392 )
+
+[node name="LevelTemplate" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="MapTemplate" type="TileMap" parent="."]
+mode = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 64 )
+format = 1
+tile_data = PoolIntArray( -786417, 5, 0, -720880, 5, 0, -196584, 5, 0, -131047, 5, 0, 131072, 10, 0, 196609, 10, 0, 720905, 10, 0, 786442, 10, 0 )
+
+[node name="TowerContainer" type="YSort" parent="."]
+
+[node name="EnemyContainer" type="YSort" parent="."]
+
+[node name="ProjectileContainer" type="YSort" parent="."]
+
+[node name="Routes" type="Node2D" parent="."]
+
+[node name="First_Path" type="Path2D" parent="Routes"]
+curve = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1005, 533 )
+current = true
+zoom = Vector2( 1.6, 1.6 )
+
+[node name="Build_Tool" type="Node2D" parent="."]
+
+[node name="AttackRange" type="Polygon2D" parent="Build_Tool"]
+color = Color( 0.870588, 0.8, 0.0901961, 0.580392 )
+polygon = PoolVector2Array( 0, -160, 320, 0, 0, 160, -320, 0 )
+
+[node name="BuildInterface" type="Sprite" parent="Build_Tool"]
+material = SubResource( 3 )
+scale = Vector2( 0.8, 1 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, -20 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BuildUI" type="NinePatchRect" parent="UI"]
+self_modulate = Color( 1, 1, 1, 0.494118 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -104.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BuildUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Red_Tower_Button" type="TextureButton" parent="UI/BuildUI/HBoxContainer"]
+margin_left = 424.0
+margin_right = 504.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 8 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/BuildUI/HBoxContainer/Red_Tower_Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -30.0
+margin_right = 25.0
+margin_bottom = 30.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Purple_Tower_Button" type="TextureButton" parent="UI/BuildUI/HBoxContainer"]
+margin_left = 519.0
+margin_right = 599.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 8 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/BuildUI/HBoxContainer/Purple_Tower_Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -30.0
+margin_right = 25.0
+margin_bottom = 30.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPS" type="RichTextLabel" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="UI/BuildUI/HBoxContainer/Red_Tower_Button" to="." method="_on_Select_Tower_button_down" binds= [ "Red_Tower" ]]
+[connection signal="mouse_entered" from="UI/BuildUI/HBoxContainer/Red_Tower_Button" to="." method="_on_Tower_Button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/BuildUI/HBoxContainer/Red_Tower_Button" to="." method="_on_Tower_Button_mouse_exited"]
+[connection signal="button_down" from="UI/BuildUI/HBoxContainer/Purple_Tower_Button" to="." method="_on_Select_Tower_button_down" binds= [ "Purple_Tower" ]]
+[connection signal="mouse_entered" from="UI/BuildUI/HBoxContainer/Purple_Tower_Button" to="." method="_on_Tower_Button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/BuildUI/HBoxContainer/Purple_Tower_Button" to="." method="_on_Tower_Button_mouse_exited"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Towers/TowerTemplate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Towers/Assets/towerSquare_sampleE_E.png" type="Texture" id=2]
+[ext_resource path="res://Towers/Assets/towerDefense_tile297.png" type="Texture" id=3]
+[ext_resource path="res://Towers/Projectiles/BasicTweenProjectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Towers/Purple_Tower.gd" type="Script" id=5]
+[ext_resource path="res://Towers/FrenzyModeTarget.gd" type="Script" id=6]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, -224, 448, 0, 0, 224, -448, 0 )
+
+[node name="Purple_Tower" groups=[
+"frenzy",
+] instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+attack_range = 3
+projectile = ExtResource( 4 )
+
+[node name="Sprite" parent="Node2D" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource( 1 )
+
+[node name="FrenzyPivot" type="Node2D" parent="." index="3"]
+
+[node name="FrenzyModeTarget" type="Position2D" parent="FrenzyPivot" index="0"]
+position = Vector2( 0, -598.566 )
+script = ExtResource( 6 )
+
+[node name="TextureButton" type="TextureButton" parent="." index="4"]
+margin_left = -20.0
+margin_top = 20.0
+margin_right = 44.0
+margin_bottom = 84.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="TextureButton" to="." method="_on_TextureButton_button_down"]
